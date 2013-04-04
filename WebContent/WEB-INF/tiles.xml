@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="baseLayout" template="/layouts/baseLayout.jsp">
+		<put-attribute name="title" value="Gigit v1.0" />
+		<put-attribute name="header" value="/templates/header.jsp" />
+		<put-attribute name="menu" value="/templates/menu.jsp" />
+		<put-attribute name="common" value="/templates/common.jsp" />
+		<put-attribute name="content" value="/templates/content.jsp" />
+		<put-attribute name="footer" value="/templates/footer.jsp" />
+		<put-attribute name="cssFile" value="/css/main.css"
+			type="string" />
+	</definition>
+	
+	<definition name="welcome" extends="baseLayout">
+		<put-attribute name="content" value="/jsp/Welcome.jsp" />
+	</definition>
+	<definition name="register" extends="baseLayout">
+		<put-attribute name="content" value="/jsp/Register.jsp" />
+	</definition>
+	<definition name="exception" extends="baseLayout">
+		<put-attribute name="content" value="/jsp/Exception.jsp" />
+	</definition>
+
+	<definition name="logged" extends="baseLayout">
+		<put-attribute name="common" value="/templates/commonLogged.jsp" />
+	</definition>
+	<definition name="main" extends="logged">
+		<put-attribute name="content" value="/jsp/Main.jsp" />
+	</definition>
+	<definition name="searchResult" extends="logged">
+		<put-attribute name="content" value="/jsp/SearchResult.jsp" />
+	</definition>
+	<definition name="repoDetails" extends="logged">
+		<put-attribute name="content" value="/jsp/RepoDetails.jsp" />
+	</definition>
+	<definition name="help" extends="logged">
+		<put-attribute name="content" value="/jsp/Help.jsp" />
+	</definition>
+</tiles-definitions>

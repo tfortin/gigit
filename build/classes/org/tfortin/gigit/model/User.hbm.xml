@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 27 mars 2013 00:03:46 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="org.tfortin.gigit.model.dao.User" table="USER">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" />
+			<generator class="increment" />
+		</id>
+		<property name="login" type="java.lang.String">
+			<column name="LOGIN" not-null="true" unique="true" />
+		</property>
+		<property name="pwd" type="java.lang.String">
+			<column name="PWD" />
+		</property>
+		<property name="firstName" type="java.lang.String">
+			<column name="FIRSTNAME" />
+		</property>
+		<property name="lastName" type="java.lang.String">
+			<column name="LASTNAME" />
+		</property>
+		<property name="active" type="boolean">
+			<column name="ACTIVE" default="true" />
+		</property>
+		<set name="histories">
+			<key column="USER_ID" />
+			<one-to-many class="org.tfortin.gigit.model.dao.History" />
+		</set>
+		<set name="bookmarks">
+			<key column="USER_ID" />
+			<one-to-many class="org.tfortin.gigit.model.dao.Bookmark" />
+		</set>
+	</class>
+</hibernate-mapping>

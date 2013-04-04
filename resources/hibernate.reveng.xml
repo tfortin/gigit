@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<type-mapping>
+		<sql-type jdbc-type="BIGINT" hibernate-type="java.lang.Long"
+			not-null="true">
+		</sql-type>
+		<sql-type jdbc-type="VARCHAR" hibernate-type="string"
+			not-null="false">
+		</sql-type>
+		<sql-type jdbc-type="VARCHAR" hibernate-type="string"
+			not-null="false">
+		</sql-type>
+		<sql-type jdbc-type="VARCHAR" hibernate-type="string"
+			not-null="false">
+		</sql-type>
+		<sql-type jdbc-type="VARCHAR" hibernate-type="string"
+			not-null="false">
+		</sql-type>
+		<sql-type jdbc-type="BOOLEAN" hibernate-type="java.lang.Boolean"
+			not-null="false">
+		</sql-type>
+		<sql-type jdbc-type="VARCHAR" hibernate-type="string"></sql-type>
+	</type-mapping>
+
+
+
+	<table-filter match-catalog="PUBLIC" match-schema="PUBLIC"
+		match-name="USER" />
+	<table-filter match-name="HISTORY" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+	<table-filter match-name="BOOKMARK" match-catalog="PUBLIC"
+		match-schema="PUBLIC">
+	</table-filter>
+	<table catalog="PUBLIC" schema="PUBLIC" name="USER">
+		<column name="ID" jdbc-type="BIGINT" type="java.lang.Long"
+			property="id">
+		</column>
+		<column name="LOGIN" type="string" jdbc-type="VARCHAR"
+			property="login">
+		</column>
+		<column name="PWD" type="string" jdbc-type="VARCHAR"
+			property="pwd">
+		</column>
+		<column name="FIRSTNAME" type="string" jdbc-type="VARCHAR"
+			property="firstName">
+		</column>
+		<column name="LASTNAME" type="string" jdbc-type="VARCHAR"
+			property="lastName">
+		</column>
+		<column name="ACTIVE" type="java.lang.Boolean" property="active"
+			jdbc-type="BOOLEAN">
+		</column>
+	</table>
+	<table catalog="PUBLIC" schema="PUBLIC" name="HISTORY">
+		<column name="ID"></column>
+		<column name="USER_ID"></column>
+		<column name="SEARCH"></column>
+		<column name="SEARCH_TIME"></column>
+		<column name="USER_SEARCH"></column>
+	</table>
+</hibernate-reverse-engineering>

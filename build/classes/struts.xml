@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.custom.i18n.resources" value="resources" />
+	<constant name="struts.enable.SlashesInActionNames" value="true" />
+	<constant name="struts.mapper.alwaysSelectFullNamespace"
+		value="false" />
+	<constant name="struts.action.extension" value=",action" />
+	<constant name="struts.locale" value="fr" />
+
+	<package name="org.tfortin.gigit" namespace="/" extends="struts-default">
+
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" />
+		</result-types>
+
+		<interceptors>
+			<interceptor name="beforeExecute"
+				class="org.tfortin.gigit.interceptor.BeforeInterceptor" />
+			<interceptor name="login"
+				class="org.tfortin.gigit.interceptor.LoginInterceptor" />
+
+			<interceptor-stack name="wirelessStack">
+				<interceptor-ref name="exception" />
+				<interceptor-ref name="login" />
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="i18n" />
+				<interceptor-ref name="chain" />
+				<interceptor-ref name="params" />
+				<interceptor-ref name="beforeExecute" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="wirelessStack" />
+
+		<!-- Default action -->
+		<default-action-ref name="Welcome" />
+
+		<!-- Default action super class -->
+		<default-class-ref class="org.tfortin.gigit.action.GigitAction" />
+
+		<global-results>
+			<result name="runtime" type="tiles">exception</result>
+			<result name="exception" type="tiles">exception</result>
+			<result name="login" type="tiles">welcome</result>
+			<result name="main" type="redirectAction">Main</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping result="runtime"
+				exception="java.lang.RuntimeException" />
+			<exception-mapping result="exception" exception="java.lang.Exception" />
+		</global-exception-mappings>
+
+		<action name="Welcome" class="org.tfortin.gigit.action.WelcomeAction">
+			<result name="none" type="tiles">welcome</result>
+			<result name="success" type="redirectAction">Main</result>
+		</action>
+		<action name="LogIn" class="org.tfortin.gigit.action.LogInAction"
+			method="logIn">
+			<result name="success" type="redirectAction">Main</result>
+			<result name="error" type="tiles">welcome</result>
+		</action>
+		<action name="Register" class="org.tfortin.gigit.action.RegisterAction">
+			<result type="tiles">register</result>
+		</action>
+		<action name="CreateUser" class="org.tfortin.gigit.action.RegisterAction"
+			method="register">
+			<result name="success" type="redirectAction">Welcome</result>
+			<result name="error" type="tiles">register</result>
+		</action>
+		<action name="Main" class="org.tfortin.gigit.action.MainAction">
+			<result type="tiles">main</result>
+		</action>
+		<action name="Search" class="org.tfortin.gigit.action.MainAction">
+			<result type="tiles">main</result>
+		</action>
+		<action name="LogOut" class="org.tfortin.gigit.action.MainAction"
+			method="logOut">
+			<result name="logout" type="redirectAction">Welcome</result>
+		</action>
+		<action name="SearchReposByUserName" class="org.tfortin.gigit.action.MainAction"
+			method="searchReposByUserName">
+			<result name="success" type="tiles">searchResult</result>
+			<result name="error" type="tiles">main</result>
+		</action>
+		<action name="SearchReposByName" class="org.tfortin.gigit.action.MainAction"
+			method="searchReposByName">
+			<result name="success" type="tiles">searchResult</result>
+			<result name="error" type="tiles">main</result>
+		</action>
+		<action name="SearchUserRepos" class="org.tfortin.gigit.action.MainAction"
+			method="searchUserRepos">
+			<result name="success" type="tiles">searchResult</result>
+			<result name="error" type="tiles">main</result>
+		</action>
+		<action name="RepoDetails" class="org.tfortin.gigit.action.RepoDetailsAction">
+			<result type="tiles">repoDetails</result>
+			<result name="error" type="tiles">searchResult</result>
+		</action>
+		<action name="AddToHistory" class="org.tfortin.gigit.action.AddToHistoryAction"
+			method="addToHistory">
+			<result name="input" type="redirectAction">Main</result>
+		</action>
+		<action name="Help" class="org.tfortin.gigit.action.MainAction"
+			method="help">
+			<result type="redirect">jsp/Help.jsp</result>
+		</action>
+		<action name="GitConnect" class="org.tfortin.gigit.action.MainAction"
+			method="gitConnect">
+			<result name="login">jsp/GitConnect.jsp</result>
+			<result name="success" type="redirectAction">Main</result>
+		</action>
+		<action name="GitDisconnect" class="org.tfortin.gigit.action.MainAction"
+			method="gitDisconnect">
+			<result name="success" type="redirectAction">Main</result>
+		</action>
+		<action name="Bookmark" class="org.tfortin.gigit.action.BookmarkAction"
+			method="bookmark">
+			<result name="input" type="redirectAction">
+				<param name="actionName">RepoDetails</param>
+				<param name="repoId">%{repoId}</param>
+			</result>
+		</action>
+		<action name="BrowseFavorites" class="org.tfortin.gigit.action.MainAction"
+			method="browseFavorites">
+			<result>jsp/BrowseFavorites.jsp</result>
+		</action>
+		<action name="BrowseBookmarks" class="org.tfortin.gigit.action.MainAction"
+			method="browseBookmarks">
+			<result>jsp/BrowseBookmarks.jsp</result>
+		</action>
+	</package>
+
+</struts>
